@@ -21,7 +21,8 @@ from django.conf.urls import url
 from demo import views
 urlpatterns = [
     path('admin/', admin.site.urls),
-    # path('index',views.index),#
-    url(r'index',views.index)#和path路由效果是一样的
+    # path('index2',views.index2),#
+    url(r'^index$',views.index),#和path路由效果是一样的
+    url(r'index2',views.index2),
 
 ]

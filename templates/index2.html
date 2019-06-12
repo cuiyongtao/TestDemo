@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1 id="helloworld"></h1>
+<!--必须放在h1下面不然会报null，因为找不到id为helloworld的控件-->
+<script type="text/javascript">
+    var data = {{ data|safe }}
+        document.getElementById("helloworld").innerHTML = data[2]
+</script>
+
+<ul>
+    {% for list in data %}
+        <li>{{ list }}</li>
+    {% endfor %}
+</ul>
+</body>
+</html>
