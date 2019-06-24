@@ -24,5 +24,6 @@ urlpatterns = [
     # path('index2',views.index2),#
     url(r'^index$',views.index),#和path路由效果是一样的
     url(r'index2',views.index2),
+    url(r'^login$',views.login),
 
 ]
