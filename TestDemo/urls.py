@@ -15,15 +15,22 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from django.conf.urls import url
-
-
+from django.conf.urls import url, include
 from demo import views
+from rest_framework import routers
+
+# 定义路由地址
+route = routers.DefaultRouter()
+
+# 注册新的路由地址
+route.register(r'getuser', views.UserInfoSet,base_name=1)
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     # path('index2',views.index2),#
-    url(r'^index$',views.index),#和path路由效果是一样的
-    url(r'index2',views.index2),
-    url(r'^login$',views.login),
-
+    url(r'^index$', views.index),  # 和path路由效果是一样的
+    url(r'index2', views.index2),
+    url(r'^login$', views.login),
+    url(r'^getdata',views.get_data),
+    url(r'^', include(route.urls)),
 ]

@@ -3,6 +3,7 @@ from django.http import HttpResponse
 from demo.models import UserInfo
 import json
 
+
 # Create your views here.
 
 def index(request):  # request 必须要写，不然会报错
@@ -32,10 +33,29 @@ def login(request):
         # userList.append({"username":username,password:password})
         # 添加到数据
         UserInfo.objects.create(usrename=username, password=password)
-        #获取表中所有数据
-        userList=UserInfo.objects.all()
+        # 获取表中所有数据
+        userList = UserInfo.objects.all()
         # 打印接收的数据
         print(userList)
         return render(request, "login.html", {"data": userList})
     elif request.method == "GET":
         return render(request, "login.html")
+
+
+import json
+from django.core import serializers
+
+
+def get_data(request):
+    data = serializers.serialize("json", UserInfo.objects.all())
+    print(data)
+    return HttpResponse(data)
+
+
+from demo.userinfo_serializer import UserInfoSerializer
+from rest_framework import viewsets
+
+
+class UserInfoSet(viewsets.ModelViewSet):
+    queryset = UserInfo.objects.filter(id=1)
+    serializer_class = UserInfoSerializer
